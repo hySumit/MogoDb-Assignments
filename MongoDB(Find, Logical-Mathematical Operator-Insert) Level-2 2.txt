@@ -1,0 +1,34 @@
+MongoDB(Find, Logical-Mathematical Operator-Insert) Level-2
+
+
+Find all documents where the gender is 'Male' and salary is less than or equal to 70000
+
+answer 	-> db.Employees.find({$and:[{gender:"Male"},{salary:{$lte:70000}}]})
+
+Retrieve documents where the age is greater than or equal to 30 and the last name is not 'Bestall'
+
+answer -> db.Employees.find({$and:[{age:{$gte:30}},{last_name:{$ne:"Bestall"}}]})
+
+Find all documents where the gender is 'Female' and (age is greater than 40 or salary is less than 80000).
+
+answer -> db.Employees.find({$and:[{gender:"Female"},{age:{$gt:40}},{salary:{$lt:80000}}]})
+
+Retrieve all documents where the salary is greater than 100000.
+
+answer -> db.Employees.find({salary:{$gt:100000}})
+
+Find all documents where the age is equal to 30.
+
+answer -> db.Employees.find({age:{$eq:30}})
+
+Retrieve documents where the salary is less than 75000.
+
+answer -> db.Employees.find({salary:{$lt:75000}})
+
+Find all documents where the age is less than 35 and the salary is greater than or equal to 80000.
+
+answer -> db.Employees.find({$and:[{age:{$lt:35}},{salary:{$gte:80000}}]})
+
+
+Name - Sumit Kumar
+cap id - cap04_075

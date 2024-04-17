@@ -1,0 +1,54 @@
+Problem Statements
+
+
+1.Write Mongo query to retrieve documents from the orders in ascending order by total.
+answer->> db.orders.aggregate().sort({total:1})
+
+2.Write Mongo query to retrieve the oldest paymentMethod from the payments collection as "_id".
+answer->> db.payments.aggregate([{$group:{_id:"$paymentMethod",date:{$min:"$payment_date"}}},{$sort:{date:1}},{$limit:1}])
+
+3.Write Mongo query to retrieve the recent paymentMethod from the payments collection as "_id".
+answer->> db.payments.aggregate([{$group:{_id:"$paymentMethod", date :{ $max: "$payment_date"}}},{$sort:{date:-1}},{$limit:1}])
+
+4.Write Mongo query to retrieve 2nd and 3rd buyers from the buyers collection.
+answer->> db.buyers.find().skip(1).limit(2)
+
+5.Write Mongo query to retrieve the less Expensive product from order_details.
+answer->> db.order_details.aggregate([{$sort:{price:1}},{$limit:1}])
+
+6.Write Mongo query to retrieve the most Expensive product from order_details.
+answer->> db.order_details.aggregate([{$sort:{price:-1}},{$limit:1}])
+
+7.Write Mongo query to retrieve the first order from the orders as per the order_date.
+answer->> > db.orders.aggregate([ { $sort: { order_date: 1 } }, { $limit: 1 }] )
+
+8.Write Mongo query to retrieve the last 3 orders from the orders collection who have less total amount.
+answer->> db.orders.aggregate([{$sort:{total:1}},{$limit:3}])
+
+9.Write Mongo query to retrieve the most recent shipped order from the orders collection.
+answer->> db.orders.aggregate([{$sort:{ship_date:1}},{$limit:1}])
+
+10.Write Mongo query to get the total revenue from all orders
+answer->> db.orders.aggregate([{$group:{_id:null,total:{$sum:"$total"}}}])
+
+11.Write Mongo query to retrieve all the orders that shipped before 2022-05-26
+answer->>   db.orders.aggregate([{$match:{status:"shipped",ship_date:{$lt:"2022-05-26"}}}])
+
+12.Write Mongo query to find the maximum price as maxPrice of products and their names as name for each category.
+answer->> db.products.aggregate([{$group:{_id:"$category_id",maxPrice:{$max:"$price"},name:{$first:"$name"}}}])
+
+13.Write Mongo query to find Most used payment Method as paymentMethod and the number of time it is used as count.
+answer->> db.payments.aggregate([{$group:{_id:"$paymentMethod",count:{$sum:1}}},{$sort:{count:-1}},{$limit:1},{$project:{_id:"$_id",paymentMethod:"$_id",count:1}}])
+
+14.Write Mongo query to find the total count of orders by status.
+answer->> db.orders.aggregate([{$group:{_id:"$status",totalOrders:{$count:{}}}}])
+
+15.Write Mongo query to retrieve the orders grouped by customer_id with the max total
+answer->> db.orders.aggregate([{$group:{_id:"$customer_id",maxTotal:{$max:"$total"}}}])
+
+16.Write Mongo query to retrieve the orders grouped by customer_id with the average total.
+answer->> db.orders.aggregate([{$group:{_id:"$customer_id",average:{$avg:"$total"}}}])
+
+
+Name - Sumit Kumar
+cap_id - cap04_075
